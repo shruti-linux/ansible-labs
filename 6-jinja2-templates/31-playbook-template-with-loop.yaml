@@ -1,0 +1,15 @@
+---
+- name: Create configuration file
+  hosts: all
+  tasks:
+  - name: Craeting the config file
+    template:
+     src: /home/newuser/demonstration/playbook31-host.j2
+     dest: /etc/my_config.conf
+
+    vars:
+     my_servers:
+     -  web_servers
+     -  db_servers
+
+

@@ -1,0 +1,6 @@
+---
+- name: using ping module 
+  hosts: all
+  tasks: 
+  - name: using ping module
+    ping:  

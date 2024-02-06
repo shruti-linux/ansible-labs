@@ -1,0 +1,21 @@
+---
+- name: demostrate user and group management
+  hosts: windows
+  tasks:
+    - name: create local Windows user accounts
+      win_user:
+        name: bob
+        password: B0bP4ssw0rd
+        state: present
+
+    - name: add local group account
+      win_group:
+        name: databaseusers
+        state: present
+
+    - name: add a local user to a local group
+      win_group_membership:
+        name: databaseusers
+        members:
+          -  bob
+        state: present

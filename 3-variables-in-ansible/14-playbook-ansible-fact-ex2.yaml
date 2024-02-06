@@ -1,0 +1,8 @@
+---
+- name: collect information of mananged hosts
+  hosts: all
+  tasks:
+  - name: this is the information ,collected from managed hosts
+    debug:
+     msg: my name is {{ ansible_facts['hostname'] }} and fully qualified domain name is {{ansible_facts['fqdn'] }} main ip address is {{ ansible_facts['default_ipv4']['address'] }} size of the sda disk partition {{ ansible_facts ['devices']['sda']['partitions']['sda1']['size'] }}
+

@@ -1,0 +1,29 @@
+---
+- name: Installing the firewall package and activating the apache service and assigning the port number
+  hosts: all
+  tasks:
+  - name: Installing the firewall package
+    yum:
+     name: firewalld
+     state: present
+     
+  - name: Starting the firewall service
+    service:
+     name: firewalld
+     state: started
+     enabled: true
+
+  - name: Allowing httpd service in firewall
+    firewalld:
+     service: http
+     permanent: true
+     state: enabled
+     immediate: true
+
+  - name: Allowing the designated port number for httpd in firewall
+    firewalld:
+     port: 80/tcp
+     permanent: true
+     state: enabled
+     immediate: true
+

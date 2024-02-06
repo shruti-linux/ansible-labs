@@ -1,0 +1,46 @@
+---
+- name: Array implementation with multiple variables 
+  hosts: all
+  vars_files:
+   - /home/newuser/demonstration/variable2.yaml
+  tasks:
+  - name: Install web package {{ servers.webserver.pkg }}
+    yum: 
+     name: "{{ servers.webserver.pkg }}"
+     state: present
+
+  - name: Create a webpage
+    copy:
+     content: " hello , This is an array implemntation with multiple variables"
+     dest: /var/www/html/index.html
+  
+  - name: start web service {{ servers.webserver.svc }}
+    service:
+     name: "{{ servers.webserver.svc }}"
+     state: started
+     enabled: true
+
+  - name: Allow web service in firewall {{ servers.webserver.svc1 }} 
+    firewalld:
+     service: "{{ servers.webserver.svc1 }}"
+     permanent: true
+     state: enabled
+     immediate: true
+
+  - name: Install file server package {{ servers.fileserver.pkg }}
+    yum:
+     name: "{{ servers.fileserver.pkg }}"
+     state:  present
+
+  - name: Start the service {{ servers.fileserver.svc }}
+    service:
+     name: "{{ servers.fileserver.svc }}"
+     state: started
+     enabled: true
+
+  - name: Allow Firewalld service {{ servers.fileserver.svc1 }} 
+    firewalld:
+     service: "{{ servers.fileserver.svc1 }}"
+     state: enabled
+     immediate: true
+     permanent: true

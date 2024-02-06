@@ -1,0 +1,19 @@
+---
+- name: Implement notify with handler
+  hosts: all
+  tasks:
+  - name: install httpd package
+    yum:
+     name: httpd
+     state: present
+  - name: create a webpage
+    copy:
+     content: " this  is webpage"
+     dest: /var/www/html/index.html
+    notify: restart_service
+  handlers:
+  - name: restart_service
+    service:
+     name: restart_service
+     state: restarted
+    

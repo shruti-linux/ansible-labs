@@ -1,0 +1,47 @@
+---
+- name: Handling the paritions
+  hosts: all
+  tasks:
+  - name: Create the parition of 10MB
+    parted: 
+     device: /dev/sdb
+     number: 1
+     state: present
+     part_end: 10MB
+  - name: create a file system
+    filesystem:
+     fstype: xfs
+     device: /dev/sdb
+
+  - name: create a file system
+    filesystem:
+     fstype: xfs
+     device: /dev/sdb
+
+  - name: create a directory for mount
+    file:
+     path: /new-disk
+     state: directory
+
+  - name: mount the drive in the directory
+    mount:
+     path: /new-disk
+     src: /dev/sdb
+     fstype: xfs
+     state: mounted
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+

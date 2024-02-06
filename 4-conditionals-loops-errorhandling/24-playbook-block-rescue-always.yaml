@@ -1,0 +1,28 @@
+---
+- name: Using Block resuce and always , will configure the webserver
+  hosts: all
+  tasks:
+  - name: Install httpd package
+    block:
+    - name: install httpd package
+      yum: 
+       name: httpd
+       state: present
+    - name: restart the service
+      service:
+       name: apache2
+       state: started
+    rescue:
+    - name: restart the webserver
+      service:
+       name: httpd
+       state: restarted
+
+    always:
+    - name: create a file 
+      copy: 
+       content: "this is always tasks"
+       dest: /var/www/html/index.html
+
+
+

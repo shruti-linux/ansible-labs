@@ -1,0 +1,12 @@
+servers:
+
+ webserver:
+  pkg: httpd
+  svc: httpd
+  svc1: http
+
+
+ fileserver:
+  pkg: vsftpd
+  svc: vsftpd
+  svc1: ftp

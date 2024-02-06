@@ -1,0 +1,17 @@
+---
+- name: Create the multiple user
+  hosts: all
+  tasks:
+  - name: enrolling multiple employee into the server
+    user:
+     name: "{{ item }}"
+     state: present
+    loop:
+    - alex
+    - jack
+    - robert
+    - sara
+    - jim
+    - ivan
+    - danny
+    

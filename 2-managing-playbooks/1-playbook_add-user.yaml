@@ -1,0 +1,9 @@
+---
+- name: Adding a user named Tom and assigning the UID to Tom
+  hosts: all
+  tasks: 
+  - name: adding a user named tom with UID
+    user: 
+     name: tom
+     uid: 30001
+     state: present

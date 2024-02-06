@@ -1,0 +1,37 @@
+---
+- name: Deployment of the packages and their services
+  hosts: all
+  vars:
+   web_pkg: httpd
+   firewall_pkg: firewalld
+   web_service: httpd
+   firewall_service: firewalld
+   python_pkg: python3-PyMySQL
+   rule: http
+  tasks:
+  - name: Required packages to be installed and updated
+    yum:
+     name:
+     - "{{ web_pkg }}"
+     - "{{ firewall_pkg }}"
+     - "{{ python_pkg }}"
+     state: latest
+  - name: The {{ firewall_service }} service are started and enabled
+    service:
+     name: "{{ firewall_service }}"
+     enabled: true
+     state: started
+  
+  - name: The {{ web_service }} service is started and enabled
+    service:
+     name: "{{ web_service }}"
+     enabled: true
+     state: started
+
+  - name: The firewall port {{ rule }}
+    firewalld:
+     service: "{{ rule }}"
+     permanent: true
+     state: enabled
+     immediate: true
+     

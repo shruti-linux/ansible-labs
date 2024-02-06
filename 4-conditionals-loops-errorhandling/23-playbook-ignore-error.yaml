@@ -1,0 +1,24 @@
+---
+- name: Implement ignore error
+  hosts: all
+  tasks:
+  - name: install httpd package
+    yum:
+     name: httpd
+     state: present
+  - name: install vsftpd package
+    yum: 
+     name: vsftpdedrtyu
+     state: present
+    ignore_errors: true
+
+  - name: create a webpage
+    copy:
+     content: " this  is webpage"
+     dest: /var/www/html/index.html
+
+  - name: restart service
+    service:
+     name: httpd
+     state: restarted
+    

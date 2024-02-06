@@ -1,0 +1,15 @@
+---
+ - name: Testing Multiple Condition
+   hosts: all
+   tasks:
+   - name: install httpd package
+     yum:
+      name: apache2
+      state: present
+     when: ( ansible_distribution == 'Ubuntu' ) or ( ansible_distribution == ' CentOS' )
+
+   - name: install apache2 package
+     yum:
+      name: httpd
+      state: present
+     when: (ansible_distribution == 'RedHat' ) and ( ansible_kernel == '4.18.0-305.el8.x86_64' )

@@ -1,0 +1,12 @@
+[web_servers]
+node1
+
+
+
+[db_servers]
+node2
+
+
+[servers:children]
+web_servers
+db_servers

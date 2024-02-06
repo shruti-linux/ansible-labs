@@ -1,0 +1,4 @@
+---
+- hosts: all
+  roles: 
+  - localfiles-for-roles

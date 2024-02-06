@@ -1,0 +1,16 @@
+---
+- name: Install httpd on web-server
+  hosts: all
+  tasks:
+  - name: install package
+    yum:
+     name: httpd
+     state: present
+    when: inventory_hostname in groups['web_servers'] 
+
+  - name: install apache2   
+    apt:
+     name: apache2
+     state: present
+    when: inventory_hostname in groups['db_servers']
+  

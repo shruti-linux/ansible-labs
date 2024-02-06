@@ -1,0 +1,8 @@
+---
+- name: collect information in new process from facts
+  hosts: all
+  tasks:
+  - name: this is the info we have collected from managed hosts
+    debug:
+     msg: my name is {{ ansible_facts['hostname'] }} & my os {{ ansible_facts['kernel'] }}
+

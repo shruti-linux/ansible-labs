@@ -1,0 +1,36 @@
+---
+- name: Handling the paritions
+  hosts: all
+  tasks:
+  - name: Deleting the paritions
+    mount:
+     path: /new-disk
+     state: unmounted
+  
+  - name:  delete a paritions
+    parted: 
+     device: /dev/sdb
+     number: 1
+     state: absent
+     
+  - name: create a directory for mount
+    file:
+     path: /new-disk
+     state: absent 
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+

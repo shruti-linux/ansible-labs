@@ -1,0 +1,38 @@
+---
+- name: demostrate file management
+  hosts: windows
+  tasks:
+    - name: Creates (empty) files, updates file modification stamps of existing files
+      win_file:
+        path: C:\users\admin\Desktop\tester.txt
+        state: touch
+
+    - name: Creates (empty) files, updates file modification stamps of existing directories
+      win_file:
+        path: C:\users\admin\Desktop\testdir
+        state: directory
+
+    - name: Returns information about a Windows file
+      win_stat:
+        path: "{{ item }}"
+      loop:
+        - C:\users\admin\Desktop\testdir
+        - C:\users\admin\Desktop\tester.txt
+
+    - name: copies a file on the local box to remote windows locations
+      win_copy:
+        src: /home/student/windows_scripts/index.html
+        dest: C:\users\admin\Desktop\index.html
+
+    - name: Returs information about a Windows file
+      win_stat:
+        path: C:\users\admin\Desktop\index.html
+
+    - name: Get DLL or EXT file build version
+      win_file_version:
+        path: C:\Windows\Systen32\cmd.exe
+      refister: exe+file_version
+
+    - name: display build version details
+      debug:
+        msg: '{{ exe_file_version }}'

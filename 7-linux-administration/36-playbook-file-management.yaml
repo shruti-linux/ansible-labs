@@ -1,0 +1,41 @@
+--- 
+- name: Demostrate file management
+  hosts: all
+  tasks:
+  - name: Create  a file 
+    file:
+     name: /root/testing
+     state: touch
+     owner: root
+     group: root
+     mode: '0644'
+
+  - name: Fetch details of file
+    stat:
+     path: /root/testing
+  
+  - name: add a line in file
+    lineinfile:
+     path: /root/testing
+     line: This is a line added a line via lineinfile module
+
+  - name: add multiple lines in file
+    blockinfile:
+     path: /root/testing
+     block: |
+      this is line 1 in blockinfile
+      this is line 2 in the blockinfile
+
+
+  - name: use fetch module to transfer file from node to master
+    fetch:
+     src: "/home/newuser/file1"
+     dest: "/home/newuser"
+    
+
+  - name: Synchronize content between files
+    synchronize:
+     src: /home/newuser/new
+     dest: /home/newuser/new
+
+

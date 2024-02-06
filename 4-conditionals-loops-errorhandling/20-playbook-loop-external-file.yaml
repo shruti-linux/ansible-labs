@@ -1,0 +1,13 @@
+---
+- name: Declaring the variables in the beginning 
+  hosts: all
+  vars_files:
+  - /home/newuser/demonstration/var-loop.yaml
+  tasks:
+  - name: create multiple user
+    user:
+     name: "{{ item }}"
+     state: present
+    loop: "{{ usr }}" 
+
+
