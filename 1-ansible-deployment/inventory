@@ -1,4 +1,4 @@
-[web_servers]
+[dubai_servers]
 node1
 
 
@@ -8,5 +8,5 @@ node2
 
 
 [servers:children]
-web_servers
+dubai_servers
 db_servers
